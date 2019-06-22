@@ -1,22 +1,13 @@
-<html>
-    <head>
-        <title>Quynh's blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Quynh's blog</a></h1>
-        </div>
 
-        <div>
-            <p>published: 22.06.2019, 12:59</p>
-            <h2><a href="">My first post</a></h2>
-            <p>Django Girls' workshop is so cool!</p>
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <div class="date">
+                <p>published: {{ post.published_date}}</p>
+            </div>
+            <p>{{ post.text|linebreaksbr}}</p>
         </div>
-
-        <div>
-            <p>published: 22.06.2019, 13:01</p>
-            <h2><a href="">My second post</a></h2>
-            <p>Coding is fun! I'm mostly playing around though. Not sure I can remember everything.</p>
-        </div>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
